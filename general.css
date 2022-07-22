@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  height: 100vh;
+  background-image: linear-gradient(to top left, #753682, #bf2e34);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100rem;
+  height: 60rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(200px);
+  filter: blur();
+  border-radius: 9px;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  overflow: hidden;
+
+  position: relative;
+}
+
+.btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 1.9rem;
+  font-weight: 400;
+  font-family: inherit;
+  text-transform: uppercase;
+
+  border: none;
+  border-radius: 50rem;
+  background-color: rgba(255, 255, 255, 0.597);
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  backdrop-filter: blur(10px);
+  color: #444;
+  padding: 0.7rem 3rem;
+
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.btn::first-letter {
+  font-size: 2.4rem;
+  display: inline-block;
+  margin-right: 0.7rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.disable-click {
+  pointer-events: none;
+}

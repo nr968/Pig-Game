@@ -1,0 +1,105 @@
+.left,
+.right {
+  padding: 9rem;
+
+  display: flex;
+  flex: 50%;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.75s;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: auto;
+
+  text-transform: uppercase;
+}
+
+.player-active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.player-active .current {
+  background-color: #c7365f;
+}
+
+.player-active .total-score {
+  color: #c7365f;
+}
+
+.player-active .name {
+  font-weight: 700;
+}
+
+.player-wins {
+  background-color: #2f2f2f;
+}
+
+.player-wins .name {
+  color: #c7365f;
+}
+
+.name {
+  font-size: 4rem;
+  font-weight: 300;
+  color: #333;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+}
+
+.total-score {
+  font-size: 8rem;
+  color: #c7365f85;
+  font-weight: 400;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: #c7365f85;
+  border-radius: 11px;
+  padding: 2rem;
+
+  width: 65%;
+}
+
+.current-text {
+  font-size: 1.7rem;
+  color: #ddd;
+  text-transform: uppercase;
+}
+
+.current-score {
+  font-size: 3.5rem;
+  color: #fff;
+}
+
+.dice {
+  position: absolute;
+  top: 26.5%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 10rem;
+  height: 10rem;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 20%);
+}
+
+.new-game {
+  top: 6%;
+}
+
+.roll-dice {
+  top: 66%;
+}
+
+.hold {
+  top: 77%;
+}
