@@ -108,38 +108,6 @@ newGameEl.addEventListener("click", function () {
   document.querySelector(".score-limit-number").value = "";
   winScore.textContent = 0;
   document.querySelector(".win-limit").classList.add("hidden");
-  // Reset All Scores to 0
-  // totalScore0El.textContent = 0;
-  // totalScore1El.textContent = 0;
-  // currentScore0El.textContent = 0;
-  // currentScore1El.textContent = 0;
-  // scoreLimit = 0;
-  // currentScore = 0;
-  // score[0] = 0;
-  // score[1] = 0;
-  // playing = false;
-
-  // winScore.style.right = "10%";
-
-  // //Reset ActivePlayer to 0
-  // activePlayer = 0;
-  // document.querySelector(".score-limit-number").value = "";
-  // winScore.textContent = scoreLimit;
-
-  // //Remove the win class
-  // player0El.classList.remove("player-wins");
-  // player1El.classList.remove("player-wins");
-
-  // //Set Player name
-  // playerName0El.textContent = player_0;
-  // playerName1El.textContent = player_1;
-
-  // //Set Palyer 1 as Active
-  // player0El.classList.add("player-active");
-  // player1El.classList.remove("player-active");
-
-  // //Hide the die Image
-  // diceImage.classList.add("hidden");
 });
 
 rollDiceEl.addEventListener("click", function () {
