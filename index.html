@@ -17,11 +17,27 @@
     <title>Pig Game</title>
   </head>
   <body>
+    <header class="header">
+      <div>
+        <input
+          type="number"
+          class="score-limit-number"
+          placeholder="Enter the Score limit..."
+        />
+      </div>
+      <div>
+        <button class="btn limit">Set Limit</button>
+      </div>
+      <div>
+        <p class="winning-score-text">Winning Score</p>
+        <p class="winning-score">0</p>
+      </div>
+    </header>
     <main>
       <div class="container">
         <section class="left player-0 player-active">
           <div class="player">
-            <h1 class="name" id="player-0">player 1</h1>
+            <h1 class="name" id="player-name-0">player 1</h1>
             <h2 class="total-score" id="total-score-0">0</h2>
           </div>
           <div class="current">
@@ -31,7 +47,7 @@
         </section>
         <section class="right player-1">
           <div class="player">
-            <h1 class="name" id="player-1">player 2</h1>
+            <h1 class="name" id="player-name-1">player 2</h1>
             <h2 class="total-score" id="total-score-1">0</h2>
           </div>
           <div class="current">

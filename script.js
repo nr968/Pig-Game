@@ -3,8 +3,8 @@
 const player0El = document.querySelector(".player-0");
 const player1El = document.querySelector(".player-1");
 
-const playerName0El = document.getElementById("player-0");
-const playerName1El = document.getElementById("player-1");
+const playerName0El = document.getElementById("player-name-0");
+const playerName1El = document.getElementById("player-name-1");
 
 const totalScore0El = document.getElementById("total-score-0");
 const totalScore1El = document.getElementById("total-score-1");
@@ -12,109 +12,113 @@ const totalScore1El = document.getElementById("total-score-1");
 const currentScore0El = document.getElementById("current-score-0");
 const currentScore1El = document.getElementById("current-score-1");
 
+const limitEl = document.querySelector(".limit");
 const newGameEl = document.querySelector(".new-game");
 const rollDiceEl = document.querySelector(".roll-dice");
 const holdEl = document.querySelector(".hold");
 
 const diceImage = document.querySelector(".dice");
 
-let diceNumber = 0;
-let totalScore_0 = 0;
-let totalScore_1 = 0;
-let current_0 = 0;
-let current_1 = 0;
+const winScore = document.querySelector(".winning-score");
+
+let currentScore = 0;
+const score = [0, 0];
+let activePlayer = 0;
+let scoreLimit = 0;
+
+function switchPlayer() {
+  document.getElementById(`current-score-${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle("player-active");
+  player1El.classList.toggle("player-active");
+}
+
+limitEl.addEventListener("click", function () {
+  scoreLimit = Number(document.querySelector(".score-limit-number").value);
+  if (scoreLimit >= 10) {
+    winScore.style.left = "12%";
+  }
+
+  winScore.textContent = scoreLimit;
+});
 
 newGameEl.addEventListener("click", function () {
+  // Reset All Scores to 0
   totalScore0El.textContent = 0;
-  totalScore_0 = 0;
-  current_0 = 0;
   totalScore1El.textContent = 0;
-  totalScore_1 = 0;
-  current_1 = 0;
+  currentScore0El.textContent = 0;
+  currentScore1El.textContent = 0;
+  scoreLimit = 0;
+  currentScore = 0;
+  score[0] = 0;
+  score[1] = 0;
+
+  //Reset ActivePlayer to 0
+  activePlayer = 0;
+  document.querySelector(".score-limit-number").value = "";
+  winScore.textContent = scoreLimit;
+
+  //Make the buttons clickable
   rollDiceEl.classList.remove("disable-click");
   holdEl.classList.remove("disable-click");
-  if (
-    player0El.classList.contains("player-wins") ||
-    player1El.classList.contains("player-wins")
-  ) {
-    player0El.classList.remove("player-wins");
-    playerName0El.textContent = "PLAYER 1";
-    player1El.classList.remove("player-wins");
-    playerName1El.textContent = "PLAYER 2";
-  }
-  if (!player0El.classList.contains("player-active")) {
-    player1El.classList.remove("player-active");
-    player0El.classList.add("player-active");
-  }
-  if (!diceImage.classList.contains("hidden")) {
-    diceImage.classList.add("hidden");
-  }
+
+  //Remove the win class
+  player0El.classList.remove("player-wins");
+  player1El.classList.remove("player-wins");
+
+  playerName0El.textContent = "PLAYER 1";
+  playerName1El.textContent = "PLAYER 2";
+
+  //Set Palyer 1 as Active
+  player0El.classList.add("player-active");
+  player1El.classList.remove("player-active");
+
+  //Hide the die Image
+  diceImage.classList.add("hidden");
 });
 
 rollDiceEl.addEventListener("click", function () {
-  if (player0El.classList.contains("player-active")) {
-    diceNumber = Math.trunc(Math.random() * 6) + 1;
-    diceImage.src = `${"img/dice-" + String(diceNumber) + ".png"}`;
-    if (diceImage.classList.contains("hidden")) {
-      diceImage.classList.remove("hidden");
-    }
-    if (diceNumber !== 1) {
-      current_0 += diceNumber;
-      currentScore0El.textContent = current_0;
-    } else {
-      player0El.classList.remove("player-active");
-      player1El.classList.add("player-active");
-      currentScore0El.textContent = 0;
-      current_0 = 0;
-    }
-  } else {
-    diceNumber = Math.trunc(Math.random() * 6) + 1;
-    diceImage.src = `${"img/dice-" + String(diceNumber) + ".png"}`;
-    if (diceImage.classList.contains("hidden")) {
-      diceImage.classList.remove("hidden");
-    }
-    if (diceNumber !== 1) {
-      current_1 += diceNumber;
-      currentScore1El.textContent = current_1;
-    } else {
-      player1El.classList.remove("player-active");
-      player0El.classList.add("player-active");
-      currentScore1El.textContent = 0;
-      current_1 = 0;
-    }
+  // 1. Generate Random Dice number
+  const diceNumber = Math.trunc(Math.random() * 6) + 1;
+
+  //2. Display the dice image
+  diceImage.src = `img/dice-${diceNumber}.png`;
+  if (diceImage.classList.contains("hidden")) {
+    diceImage.classList.remove("hidden");
+  }
+
+  //3. Check for rolled 1
+  if (diceNumber !== 1) {
+    currentScore += diceNumber;
+    document.getElementById(`current-score-${activePlayer}`).textContent =
+      currentScore;
+  }
+  // Switch active Player
+  else {
+    switchPlayer();
   }
 });
 
 holdEl.addEventListener("click", function () {
-  if (player0El.classList.contains("player-active")) {
-    totalScore_0 += current_0;
-    current_0 = 0;
-    totalScore0El.textContent = totalScore_0;
-    currentScore0El.textContent = 0;
+  // 1. Add currentScore to TotalScore
+  score[activePlayer] += currentScore;
+  document.getElementById(`total-score-${activePlayer}`).textContent =
+    score[activePlayer];
 
-    if (totalScore_0 >= 100) {
-      player0El.classList.add("player-wins");
-      playerName0El.textContent = "🎉WINNER!!!";
-      rollDiceEl.classList.add("disable-click");
-      holdEl.classList.add("disable-click");
-    } else {
-      player0El.classList.remove("player-active");
-      player1El.classList.add("player-active");
-    }
-  } else {
-    totalScore_1 += current_1;
-    current_1 = 0;
-    totalScore1El.textContent = totalScore_1;
-    currentScore1El.textContent = 0;
+  // 2. Check id player's score is >=100
+  if (score[activePlayer] >= scoreLimit) {
+    document
+      .querySelector(`.player-${activePlayer}`)
+      .classList.add("player-wins");
+    document.getElementById(`player-name-${activePlayer}`).textContent =
+      "🎉WINNER!!!";
+    rollDiceEl.classList.add("disable-click");
+    holdEl.classList.add("disable-click");
+  }
 
-    if (totalScore_1 >= 100) {
-      player1El.classList.add("player-wins");
-      playerName1El.textContent = "🎉WINNER!!!";
-      rollDiceEl.classList.add("disable-click");
-      holdEl.classList.add("disable-click");
-    } else {
-      player1El.classList.remove("player-active");
-      player0El.classList.add("player-active");
-    }
+  // 3. Switch active Player
+  else {
+    switchPlayer();
   }
 });
