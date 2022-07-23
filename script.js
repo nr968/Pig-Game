@@ -41,38 +41,12 @@ function switchPlayer() {
   player1El.classList.toggle("player-active");
 }
 
-playerNameSubmitEl.addEventListener("click", function () {
-  player_0 = document.querySelector(".name-0").value;
-  playerName0El.textContent = player_0;
-  player_1 = document.querySelector(".name-1").value;
-  playerName1El.textContent = player_1;
-  document.querySelector(".player-details-box").classList.add("hidden");
-  document.querySelector(".overlay").classList.add("hidden");
-  playerNameSubmitEl.classList.add("hidden");
-  document.querySelector(".score-limit-number").focus();
-});
-
-limitEl.addEventListener("click", function () {
-  scoreLimit = Number(document.querySelector(".score-limit-number").value);
-  if (scoreLimit > 0) {
-    if (scoreLimit >= 10) {
-      winScore.style.right = "8.5%";
-    }
-    winScore.textContent = scoreLimit;
-    playing = true;
-  } else {
-    alert("Please enter a score limit greater than 0");
-    document.querySelector(".score-limit-number").focus();
-  }
-});
-
-newGameEl.addEventListener("click", function () {
-  // Reset All Scores to 0
+function init() {
   totalScore0El.textContent = 0;
   totalScore1El.textContent = 0;
   currentScore0El.textContent = 0;
   currentScore1El.textContent = 0;
-  scoreLimit = 0;
+  // scoreLimit = 0;
   currentScore = 0;
   score[0] = 0;
   score[1] = 0;
@@ -82,7 +56,7 @@ newGameEl.addEventListener("click", function () {
 
   //Reset ActivePlayer to 0
   activePlayer = 0;
-  document.querySelector(".score-limit-number").value = "";
+  // document.querySelector(".score-limit-number").value = "";
   winScore.textContent = scoreLimit;
 
   //Remove the win class
@@ -99,6 +73,70 @@ newGameEl.addEventListener("click", function () {
 
   //Hide the die Image
   diceImage.classList.add("hidden");
+}
+
+playerNameSubmitEl.addEventListener("click", function () {
+  player_0 = document.querySelector(".name-0").value;
+  playerName0El.textContent = player_0;
+  player_1 = document.querySelector(".name-1").value;
+  playerName1El.textContent = player_1;
+  document.querySelector(".player-details-box").classList.add("hidden");
+  document.querySelector(".overlay").classList.add("hidden");
+  playerNameSubmitEl.classList.add("hidden");
+  document.querySelector(".score-limit-number").focus();
+});
+
+limitEl.addEventListener("click", function () {
+  init();
+  scoreLimit = Number(document.querySelector(".score-limit-number").value);
+  if (scoreLimit > 0) {
+    if (scoreLimit >= 10) {
+      winScore.style.right = "8.5%";
+    }
+    winScore.textContent = scoreLimit;
+    playing = true;
+  } else {
+    alert("Please enter a score limit greater than 0");
+    document.querySelector(".score-limit-number").focus();
+  }
+});
+
+newGameEl.addEventListener("click", function () {
+  init();
+  scoreLimit = 0;
+  document.querySelector(".score-limit-number").value = "";
+  // Reset All Scores to 0
+  // totalScore0El.textContent = 0;
+  // totalScore1El.textContent = 0;
+  // currentScore0El.textContent = 0;
+  // currentScore1El.textContent = 0;
+  // scoreLimit = 0;
+  // currentScore = 0;
+  // score[0] = 0;
+  // score[1] = 0;
+  // playing = false;
+
+  // winScore.style.right = "10%";
+
+  // //Reset ActivePlayer to 0
+  // activePlayer = 0;
+  // document.querySelector(".score-limit-number").value = "";
+  // winScore.textContent = scoreLimit;
+
+  // //Remove the win class
+  // player0El.classList.remove("player-wins");
+  // player1El.classList.remove("player-wins");
+
+  // //Set Player name
+  // playerName0El.textContent = player_0;
+  // playerName1El.textContent = player_1;
+
+  // //Set Palyer 1 as Active
+  // player0El.classList.add("player-active");
+  // player1El.classList.remove("player-active");
+
+  // //Hide the die Image
+  // diceImage.classList.add("hidden");
 });
 
 rollDiceEl.addEventListener("click", function () {
@@ -122,6 +160,9 @@ rollDiceEl.addEventListener("click", function () {
     else {
       switchPlayer();
     }
+  } else if (scoreLimit > 0) {
+    alert("Please restart the Game");
+    newGameEl.focus();
   } else {
     alert("Please enter a score limit greater than 0");
     document.querySelector(".score-limit-number").focus();
@@ -141,17 +182,22 @@ holdEl.addEventListener("click", function () {
         .querySelector(`.player-${activePlayer}`)
         .classList.add("player-wins");
       const winner =
-        "🎉" +
+        "🎉 " +
         document.getElementById(`player-name-${activePlayer}`).textContent +
         " WINS!!!";
       document.getElementById(`player-name-${activePlayer}`).textContent =
         winner;
+      playing = false;
+      newGameEl.focus();
     }
 
     // 3. Switch active Player
     else {
       switchPlayer();
     }
+  } else if (scoreLimit > 0) {
+    alert("Please restart the Game");
+    newGameEl.focus();
   } else {
     alert("Please enter a score limit greater than 0");
     document.querySelector(".score-limit-number").focus();
