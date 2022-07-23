@@ -41,6 +41,8 @@ limitEl.addEventListener("click", function () {
   }
 
   winScore.textContent = scoreLimit;
+  rollDiceEl.classList.remove("disable-click");
+  holdEl.classList.remove("disable-click");
 });
 
 newGameEl.addEventListener("click", function () {
