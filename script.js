@@ -49,7 +49,7 @@ playerNameSubmitEl.addEventListener("click", function () {
 limitEl.addEventListener("click", function () {
   scoreLimit = Number(document.querySelector(".score-limit-number").value);
   if (scoreLimit >= 10) {
-    winScore.style.left = "12%";
+    winScore.style.right = "8.5%";
   }
 
   winScore.textContent = scoreLimit;

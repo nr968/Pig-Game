@@ -9,9 +9,7 @@
 
 /* input[number], */
 .score-limit-number {
-  /* display: inline-block; */
-  width: 100%;
-  margin-bottom: 2rem;
+  display: inline-block;
   padding: 1.2rem 2.4rem;
   border: none;
   text-align: center;
@@ -59,14 +57,14 @@
   font-size: 3.2rem;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
 }
 
 .winning-score {
   font-size: 4.8rem;
   position: absolute;
   top: 5rem;
-  left: 13%;
+  right: 10%;
 }
 
 .left,
@@ -273,4 +271,27 @@
   position: relative;
   font-size: inherit;
   margin-right: 0;
+}
+
+.limit {
+  font-size: 1.9rem;
+  font-weight: 400;
+  font-family: inherit;
+  text-transform: uppercase;
+
+  /* border: 2px solid #fff; */
+  border: none;
+  border-radius: 50rem;
+  background-image: linear-gradient(to top left, #bf2e34, #753682);
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 0.7rem 3rem;
+
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.limit:hover {
+  background-image: linear-gradient(to top left, #753682, #bf2e34);
 }

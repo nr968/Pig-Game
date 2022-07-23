@@ -35,9 +35,9 @@ body {
   margin-bottom: 10rem;
 
   display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  justify-content: center;
+  /* flex-direction: column; */
+  gap: 2.4rem;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -45,7 +45,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  /* align-items: center; */
+  align-items: center;
   justify-content: center;
 
   background-color: rgb(235, 233, 233);
