@@ -27,6 +27,11 @@ const score = [0, 0];
 let activePlayer = 0;
 let scoreLimit = 0;
 let player_0, player_1;
+let playing = false;
+
+window.onload = function () {
+  document.querySelector(".name-0").focus();
+};
 
 function switchPlayer() {
   document.getElementById(`current-score-${activePlayer}`).textContent = 0;
@@ -44,17 +49,21 @@ playerNameSubmitEl.addEventListener("click", function () {
   document.querySelector(".player-details-box").classList.add("hidden");
   document.querySelector(".overlay").classList.add("hidden");
   playerNameSubmitEl.classList.add("hidden");
+  document.querySelector(".score-limit-number").focus();
 });
 
 limitEl.addEventListener("click", function () {
   scoreLimit = Number(document.querySelector(".score-limit-number").value);
-  if (scoreLimit >= 10) {
-    winScore.style.right = "8.5%";
+  if (scoreLimit > 0) {
+    if (scoreLimit >= 10) {
+      winScore.style.right = "8.5%";
+    }
+    winScore.textContent = scoreLimit;
+    playing = true;
+  } else {
+    alert("Please enter a score limit greater than 0");
+    document.querySelector(".score-limit-number").focus();
   }
-
-  winScore.textContent = scoreLimit;
-  rollDiceEl.classList.remove("disable-click");
-  holdEl.classList.remove("disable-click");
 });
 
 newGameEl.addEventListener("click", function () {
@@ -67,15 +76,14 @@ newGameEl.addEventListener("click", function () {
   currentScore = 0;
   score[0] = 0;
   score[1] = 0;
+  playing = false;
+
+  winScore.style.right = "10%";
 
   //Reset ActivePlayer to 0
   activePlayer = 0;
   document.querySelector(".score-limit-number").value = "";
   winScore.textContent = scoreLimit;
-
-  //Make the buttons clickable
-  rollDiceEl.classList.remove("disable-click");
-  holdEl.classList.remove("disable-click");
 
   //Remove the win class
   player0El.classList.remove("player-wins");
@@ -94,49 +102,58 @@ newGameEl.addEventListener("click", function () {
 });
 
 rollDiceEl.addEventListener("click", function () {
-  // 1. Generate Random Dice number
-  const diceNumber = Math.trunc(Math.random() * 6) + 1;
+  if (playing) {
+    // 1. Generate Random Dice number
+    const diceNumber = Math.trunc(Math.random() * 6) + 1;
 
-  //2. Display the dice image
-  diceImage.src = `img/dice-${diceNumber}.png`;
-  if (diceImage.classList.contains("hidden")) {
-    diceImage.classList.remove("hidden");
-  }
+    //2. Display the dice image
+    diceImage.src = `img/dice-${diceNumber}.png`;
+    if (diceImage.classList.contains("hidden")) {
+      diceImage.classList.remove("hidden");
+    }
 
-  //3. Check for rolled 1
-  if (diceNumber !== 1) {
-    currentScore += diceNumber;
-    document.getElementById(`current-score-${activePlayer}`).textContent =
-      currentScore;
-  }
-  // Switch active Player
-  else {
-    switchPlayer();
+    //3. Check for rolled 1
+    if (diceNumber !== 1) {
+      currentScore += diceNumber;
+      document.getElementById(`current-score-${activePlayer}`).textContent =
+        currentScore;
+    }
+    // Switch active Player
+    else {
+      switchPlayer();
+    }
+  } else {
+    alert("Please enter a score limit greater than 0");
+    document.querySelector(".score-limit-number").focus();
   }
 });
 
 holdEl.addEventListener("click", function () {
-  // 1. Add currentScore to TotalScore
-  score[activePlayer] += currentScore;
-  document.getElementById(`total-score-${activePlayer}`).textContent =
-    score[activePlayer];
+  if (playing) {
+    // 1. Add currentScore to TotalScore
+    score[activePlayer] += currentScore;
+    document.getElementById(`total-score-${activePlayer}`).textContent =
+      score[activePlayer];
 
-  // 2. Check id player's score is >=100
-  if (score[activePlayer] >= scoreLimit) {
-    document
-      .querySelector(`.player-${activePlayer}`)
-      .classList.add("player-wins");
-    const winner =
-      "🎉" +
-      document.getElementById(`player-name-${activePlayer}`).textContent +
-      " WINS!!!";
-    document.getElementById(`player-name-${activePlayer}`).textContent = winner;
-    rollDiceEl.classList.add("disable-click");
-    holdEl.classList.add("disable-click");
-  }
+    // 2. Check id player's score is >=100
+    if (score[activePlayer] >= scoreLimit) {
+      document
+        .querySelector(`.player-${activePlayer}`)
+        .classList.add("player-wins");
+      const winner =
+        "🎉" +
+        document.getElementById(`player-name-${activePlayer}`).textContent +
+        " WINS!!!";
+      document.getElementById(`player-name-${activePlayer}`).textContent =
+        winner;
+    }
 
-  // 3. Switch active Player
-  else {
-    switchPlayer();
+    // 3. Switch active Player
+    else {
+      switchPlayer();
+    }
+  } else {
+    alert("Please enter a score limit greater than 0");
+    document.querySelector(".score-limit-number").focus();
   }
 });

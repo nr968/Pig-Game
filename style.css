@@ -267,6 +267,11 @@
   background-image: linear-gradient(to top left, #bf2e34, #753682);
 }
 
+.player-names-submit:active {
+  transform: translate(-50%, 3px);
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 1);
+}
+
 .player-details-box::first-letter {
   position: relative;
   font-size: inherit;
@@ -294,4 +299,9 @@
 
 .limit:hover {
   background-image: linear-gradient(to top left, #753682, #bf2e34);
+}
+
+.limit:active {
+  transform: translate(0, 3px);
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 1);
 }
