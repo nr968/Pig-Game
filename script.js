@@ -90,11 +90,12 @@ limitEl.addEventListener("click", function () {
   init();
   scoreLimit = Number(document.querySelector(".score-limit-number").value);
   if (scoreLimit > 0) {
+    document.querySelector(".win-limit").classList.remove("hidden");
+    winScore.textContent = scoreLimit;
+    playing = true;
     if (scoreLimit >= 10) {
       winScore.style.right = "8.5%";
     }
-    winScore.textContent = scoreLimit;
-    playing = true;
   } else {
     alert("Please enter a score limit greater than 0");
     document.querySelector(".score-limit-number").focus();
@@ -105,6 +106,8 @@ newGameEl.addEventListener("click", function () {
   init();
   scoreLimit = 0;
   document.querySelector(".score-limit-number").value = "";
+  winScore.textContent = 0;
+  document.querySelector(".win-limit").classList.add("hidden");
   // Reset All Scores to 0
   // totalScore0El.textContent = 0;
   // totalScore1El.textContent = 0;
