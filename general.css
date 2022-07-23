@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem rgba(250, 211, 249, 0.5);
+}
+
 html {
   font-size: 62.5%;
 }
@@ -38,10 +43,20 @@ body {
 
 form {
   display: flex;
-  gap: 1.2rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 2.4rem;
+  /* align-items: center; */
   justify-content: center;
+
+  background-color: rgb(235, 233, 233);
+  width: 50rem;
+  padding: 3rem 6rem;
   margin-bottom: 2rem;
+}
+
+form *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem rgba(250, 211, 249, 0.5);
 }
 
 .container {
@@ -104,4 +119,15 @@ form {
 
 .disable-click {
   pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
 }

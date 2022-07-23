@@ -16,6 +16,7 @@ const limitEl = document.querySelector(".limit");
 const newGameEl = document.querySelector(".new-game");
 const rollDiceEl = document.querySelector(".roll-dice");
 const holdEl = document.querySelector(".hold");
+const playerNameSubmitEl = document.querySelector(".player-names-submit");
 
 const diceImage = document.querySelector(".dice");
 
@@ -25,6 +26,7 @@ let currentScore = 0;
 const score = [0, 0];
 let activePlayer = 0;
 let scoreLimit = 0;
+let player_0, player_1;
 
 function switchPlayer() {
   document.getElementById(`current-score-${activePlayer}`).textContent = 0;
@@ -33,6 +35,16 @@ function switchPlayer() {
   player0El.classList.toggle("player-active");
   player1El.classList.toggle("player-active");
 }
+
+playerNameSubmitEl.addEventListener("click", function () {
+  player_0 = document.querySelector(".name-0").value;
+  playerName0El.textContent = player_0;
+  player_1 = document.querySelector(".name-1").value;
+  playerName1El.textContent = player_1;
+  document.querySelector(".player-details-box").classList.add("hidden");
+  document.querySelector(".overlay").classList.add("hidden");
+  playerNameSubmitEl.classList.add("hidden");
+});
 
 limitEl.addEventListener("click", function () {
   scoreLimit = Number(document.querySelector(".score-limit-number").value);
@@ -69,8 +81,9 @@ newGameEl.addEventListener("click", function () {
   player0El.classList.remove("player-wins");
   player1El.classList.remove("player-wins");
 
-  playerName0El.textContent = "PLAYER 1";
-  playerName1El.textContent = "PLAYER 2";
+  //Set Player name
+  playerName0El.textContent = player_0;
+  playerName1El.textContent = player_1;
 
   //Set Palyer 1 as Active
   player0El.classList.add("player-active");
@@ -113,8 +126,11 @@ holdEl.addEventListener("click", function () {
     document
       .querySelector(`.player-${activePlayer}`)
       .classList.add("player-wins");
-    document.getElementById(`player-name-${activePlayer}`).textContent =
-      "🎉WINNER!!!";
+    const winner =
+      "🎉" +
+      document.getElementById(`player-name-${activePlayer}`).textContent +
+      " WINS!!!";
+    document.getElementById(`player-name-${activePlayer}`).textContent = winner;
     rollDiceEl.classList.add("disable-click");
     holdEl.classList.add("disable-click");
   }
