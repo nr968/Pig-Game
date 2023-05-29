@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta lang="en" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="general.css" />
+    <title>Pig Game</title>
+  </head>
+  <body>
+    <header class="header">
+      <div>
+        <input
+          type="number"
+          class="score-limit-number"
+          placeholder="Enter the Score limit..."
+        />
+        <!-- <button class="limit">Start Game</button> -->
+      </div>
+      <div>
+        <button class="limit">Start Game</button>
+      </div>
+      <div class="win-limit hidden">
+        <p class="winning-score-text">Winning Score</p>
+        <p class="winning-score">0</p>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <section class="left player-0 player-active">
+          <div class="player">
+            <h1 class="name" id="player-name-0">player 1</h1>
+            <h2 class="total-score" id="total-score-0">0</h2>
+          </div>
+          <div class="current">
+            <p class="current-text">Current</p>
+            <p class="current-score" id="current-score-0">0</p>
+          </div>
+        </section>
+        <section class="right player-1">
+          <div class="player">
+            <h1 class="name" id="player-name-1">player 2</h1>
+            <h2 class="total-score" id="total-score-1">0</h2>
+          </div>
+          <div class="current">
+            <p class="current-text">Current</p>
+            <p class="current-score" id="current-score-1">0</p>
+          </div>
+        </section>
+        <img src="img/dice-1.png" class="dice hidden" />
+
+        <button class="btn new-game">🔄 New game</button>
+        <button class="btn roll-dice">🎲 Roll dice</button>
+        <button class="btn hold">📥 Hold</button>
+      </div>
+    </main>
+    <form class="player-details-box">
+      <div class="player-detail-0">
+        <label class="player-name-label">First player name</label>
+        <input
+          type="text"
+          class="player-name name-0"
+          id="player-name-0"
+          placeholder="Enter Name..."
+        />
+      </div>
+      <div class="player-detail-0">
+        <label class="player-name-label">Second player name</label>
+        <input
+          type="text"
+          class="player-name name-1"
+          id="player-name-1"
+          placeholder="Enter Name..."
+        />
+      </div>
+    </form>
+    <button class="player-names-submit">Submit</button>
+    <div class="overlay"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
